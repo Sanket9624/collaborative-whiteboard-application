@@ -1,7 +1,15 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config()
-const database = require('./database')
+const db = require('./database')
 const app = express()
+
+const userRoute = require('./routes/user')
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/user',userRoute);
 
 const port = process.env.PORT
 app.listen(port,()=>{
